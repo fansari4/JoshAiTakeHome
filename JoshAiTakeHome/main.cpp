@@ -35,7 +35,7 @@ void PrintPropertyChange(const std::string& id, const std::string& key, const js
 }
 
 int ConvertBrightnessToPercent(std::uint8_t apiValue) {
-    return static_cast<int>(std::round(apiValue * 100.0 / 255.0));
+    return static_cast<int>(std::round((apiValue * 100.0) / 255.0));
 }
 
 void SignalHandler(int) {
