@@ -1,6 +1,6 @@
 # Josh.ai Light Monitor
 
-This project is a C++17 console application that polls the Josh.ai lights simulator, prints the initial light state, and emits JSON change notifications for added, removed, and updated lights.
+This project is a C++14 console application that polls the Josh.ai lights simulator, prints the initial light state, and emits JSON change notifications for added, removed, and updated lights.
 
 ## Features
 

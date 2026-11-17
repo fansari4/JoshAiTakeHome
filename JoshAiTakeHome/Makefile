@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -std=c++17 -O2 -Wall -Wextra -I. -Iinclude
+CXXFLAGS := -std=c++14 -O2 -Wall -Wextra -I. -Iinclude
 TARGET := light_monitor
 
 all: $(TARGET)

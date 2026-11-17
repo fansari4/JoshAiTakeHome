@@ -166,7 +166,9 @@ void EmitDiffs(const std::unordered_map<std::string, Light>& oldLights,
                const std::unordered_map<std::string, Light>& newLights) {
     std::unordered_set<std::string> newIds;
 
-    for (const auto& [id, light] : newLights) {
+    for (const auto& entry : newLights) {
+        const std::string& id = entry.first;
+        const Light& light = entry.second;
         newIds.insert(id);
 
         const auto it = oldLights.find(id);
@@ -190,7 +192,9 @@ void EmitDiffs(const std::unordered_map<std::string, Light>& oldLights,
         }
     }
 
-    for (const auto& [id, light] : oldLights) {
+    for (const auto& entry : oldLights) {
+        const std::string& id = entry.first;
+        const Light& light = entry.second;
         if (!newIds.count(id)) {
             EmitRemovedLight(light);
         }
@@ -200,7 +204,8 @@ void EmitDiffs(const std::unordered_map<std::string, Light>& oldLights,
 void PrintInitialState(const std::unordered_map<std::string, Light>& lights) {
     std::cout << "[\n";
     bool first = true;
-    for (const auto& [id, light] : lights) {
+    for (const auto& entry : lights) {
+        const Light& light = entry.second;
         if (!first) {
             std::cout << ",\n";
         }
