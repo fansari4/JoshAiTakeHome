@@ -5,56 +5,58 @@ This project is a C++17 console application that polls the Josh.ai lights simula
 ## Features
 
 - Polls `GET /lights` and `GET /lights/{id}`
-- Converts API brightness from 0-255 to 0-100%
+- Converts simulator brightness from `0-255` to the required `0-100` percentage
 - Detects:
   - light additions
   - light removals
   - `on`/`off` changes
   - brightness changes
   - name/room changes
-- Gracefully handles HTTP and JSON failures without exiting
-- Supports `--host`, `--port`, and `--interval` options
+- Gracefully handles HTTP and JSON errors without crashing
+- Supports `--host`, `--port`, and `--interval` command-line options
+-- `--interval` adjusts the time between polls 
+## Prerequisites
 
-## Build
+1. Start the Lights Simulator application.
+2. Confirm it is running at:
 
-### Linux/macOS
-
-```bash
-make
+```text
+http://localhost:8080
 ```
 
-### Windows (MSVC)
+## Run on Windows
 
-From a Developer PowerShell / Developer Command Prompt:
+From Command Prompt as administrator, go to the project directory:
 
-```powershell
-cl /nologo /EHsc /std:c++17 /I. /Iinclude main.cpp /Fe:light_monitor.exe
+```
+cd C:\Users\User\source\repos\JoshAiTakeHome\JoshAiTakeHome
 ```
 
-## Run
+Then run the ready-made executable:
 
-Start the simulator first, then run:
-
-```bash
-./light_monitor --host localhost --port 8080 --interval 1000
+```
+.\light_monitor.exe
 ```
 
-Or on Windows:
+This will use the default values:
 
-```powershell
+- host: `localhost`
+- port: `8080`
+- interval: `1000` ms
+
+You can also pass the values explicitly:
+
+```
 .\light_monitor.exe --host localhost --port 8080 --interval 1000
 ```
 
+The monitor will print the initial light list and continue polling for changes until you press `Ctrl+C`.
+
+
 ## Binary
 
-A ready-to-run Windows binary is included in this project directory:
+The project includes a ready-to-run Windows binary in the same folder as the source:
 
 ```text
-light_monitor.exe
+C:\Users\User\source\repos\JoshAiTakeHome\JoshAiTakeHome\light_monitor.exe
 ```
-
-## Notes
-
-- The application keeps running until Ctrl+C is pressed.
-- If the simulator is temporarily unavailable, it logs an error and retries on the next polling cycle.
-- The monitor uses a single `unordered_map` snapshot keyed by light ID for efficient diffing.
